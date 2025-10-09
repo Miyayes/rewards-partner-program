@@ -4,454 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Brave Ads Campaign Builder</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: #f8f9fa;
-            min-height: 100vh;
-            padding: 20px;
-            color: #212529;
-        }
-
-        .container {
-            max-width: 1100px;
-            margin: 0 auto;
-            background: white;
-            border-radius: 12px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-            overflow: hidden;
-        }
-
-        .header {
-            background: #fff;
-            border-bottom: 1px solid #e9ecef;
-            padding: 40px;
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            margin-bottom: 20px;
-        }
-
-        .logo-icon {
-            width: 40px;
-            height: 40px;
-            background: linear-gradient(135deg, #fb542b 0%, #ff6b35 100%);
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-weight: 700;
-            font-size: 20px;
-        }
-
-        .header h1 {
-            font-size: 32px;
-            font-weight: 600;
-            color: #212529;
-            margin-bottom: 8px;
-        }
-
-        .header p {
-            color: #6c757d;
-            font-size: 16px;
-            line-height: 1.6;
-        }
-
-        .share-section {
-            background: #f8f9fa;
-            padding: 20px;
-            margin-top: 24px;
-            border-radius: 8px;
-            border: 1px solid #e9ecef;
-        }
-
-        .share-section p {
-            font-size: 14px;
-            font-weight: 500;
-            color: #495057;
-            margin-bottom: 12px;
-        }
-
-        .share-link-container {
-            display: flex;
-            gap: 12px;
-        }
-
-        .share-link {
-            flex: 1;
-            padding: 12px 16px;
-            background: white;
-            color: #495057;
-            border-radius: 6px;
-            font-size: 13px;
-            word-break: break-all;
-            font-family: 'Monaco', 'Courier New', monospace;
-            border: 1px solid #dee2e6;
-        }
-
-        .copy-btn {
-            padding: 12px 24px;
-            background: #fb542b;
-            border: none;
-            color: white;
-            border-radius: 6px;
-            cursor: pointer;
-            font-weight: 500;
-            transition: all 0.2s ease;
-            font-size: 14px;
-        }
-
-        .copy-btn:hover {
-            background: #e64a26;
-            transform: translateY(-1px);
-        }
-
-        .content {
-            padding: 40px;
-        }
-
-        .section {
-            margin-bottom: 60px;
-        }
-
-        .section-header {
-            display: flex;
-            align-items: flex-start;
-            margin-bottom: 32px;
-        }
-
-        .section-number {
-            width: 36px;
-            height: 36px;
-            background: #fb542b;
-            color: white;
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 600;
-            font-size: 16px;
-            margin-right: 16px;
-            flex-shrink: 0;
-        }
-
-        .section-header-content {
-            flex: 1;
-        }
-
-        .section-title {
-            font-size: 24px;
-            font-weight: 600;
-            color: #212529;
-            margin-bottom: 8px;
-        }
-
-        .section-description {
-            color: #6c757d;
-            font-size: 15px;
-            line-height: 1.6;
-        }
-
-        .form-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 24px;
-        }
-
-        .form-group {
-            margin-bottom: 24px;
-        }
-
-        .form-group.full-width {
-            grid-column: 1 / -1;
-        }
-
-        label {
-            display: block;
-            font-weight: 500;
-            color: #495057;
-            margin-bottom: 8px;
-            font-size: 14px;
-        }
-
-        input[type="text"],
-        input[type="email"],
-        input[type="tel"],
-        input[type="url"],
-        input[type="date"],
-        input[type="number"],
-        textarea,
-        select {
-            width: 100%;
-            padding: 12px 16px;
-            border: 1px solid #dee2e6;
-            border-radius: 6px;
-            font-size: 15px;
-            transition: all 0.2s ease;
-            font-family: inherit;
-            background: white;
-            color: #212529;
-        }
-
-        input:focus,
-        textarea:focus,
-        select:focus {
-            outline: none;
-            border-color: #fb542b;
-            box-shadow: 0 0 0 3px rgba(251, 84, 43, 0.1);
-        }
-
-        textarea {
-            min-height: 100px;
-            resize: vertical;
-        }
-
-        .help-text {
-            font-size: 13px;
-            color: #6c757d;
-            margin-top: 6px;
-            line-height: 1.5;
-        }
-
-        .char-counter {
-            font-size: 12px;
-            color: #adb5bd;
-            margin-top: 6px;
-            text-align: right;
-        }
-
-        .char-counter.warning {
-            color: #fd7e14;
-        }
-
-        .checkbox-group {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 12px;
-        }
-
-        .checkbox-item {
-            display: flex;
-            align-items: center;
-            padding: 10px 16px;
-            background: #f8f9fa;
-            border: 1px solid #e9ecef;
-            border-radius: 6px;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            user-select: none;
-            font-size: 14px;
-        }
-
-        .checkbox-item:hover {
-            background: #e9ecef;
-            border-color: #dee2e6;
-        }
-
-        .checkbox-item input {
-            margin-right: 8px;
-            cursor: pointer;
-        }
-
-        .checkbox-item.checked {
-            background: #fff5f3;
-            border-color: #fb542b;
-            color: #fb542b;
-        }
-
-        .creative-item {
-            background: #f8f9fa;
-            border: 1px solid #e9ecef;
-            border-radius: 8px;
-            padding: 24px;
-            margin-bottom: 20px;
-        }
-
-        .creative-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 24px;
-            padding-bottom: 16px;
-            border-bottom: 1px solid #e9ecef;
-        }
-
-        .creative-item h4 {
-            color: #212529;
-            font-size: 16px;
-            font-weight: 600;
-        }
-
-        .remove-btn {
-            background: #dc3545;
-            color: white;
-            border: none;
-            padding: 8px 16px;
-            border-radius: 6px;
-            cursor: pointer;
-            font-size: 13px;
-            font-weight: 500;
-            transition: all 0.2s ease;
-        }
-
-        .remove-btn:hover {
-            background: #c82333;
-        }
-
-        button {
-            padding: 12px 24px;
-            border: none;
-            border-radius: 6px;
-            font-size: 15px;
-            font-weight: 500;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            font-family: inherit;
-        }
-
-        .btn-primary {
-            background: #fb542b;
-            color: white;
-        }
-
-        .btn-primary:hover {
-            background: #e64a26;
-            transform: translateY(-1px);
-        }
-
-        .btn-secondary {
-            background: white;
-            color: #495057;
-            border: 1px solid #dee2e6;
-        }
-
-        .btn-secondary:hover {
-            background: #f8f9fa;
-            border-color: #adb5bd;
-        }
-
-        .info-box {
-            background: #e7f3ff;
-            border-left: 4px solid #0d6efd;
-            padding: 16px 20px;
-            border-radius: 6px;
-            margin-bottom: 24px;
-            font-size: 14px;
-            line-height: 1.6;
-            color: #084298;
-        }
-
-        .info-box strong {
-            display: block;
-            margin-bottom: 8px;
-            color: #052c65;
-        }
-
-        .save-notification {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            background: #198754;
-            color: white;
-            padding: 16px 24px;
-            border-radius: 8px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-            opacity: 0;
-            transform: translateY(20px);
-            transition: all 0.3s ease;
-            z-index: 1000;
-            font-weight: 500;
-            font-size: 14px;
-        }
-
-        .save-notification.show {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .add-creative-btn {
-            width: 100%;
-            margin-top: 12px;
-        }
-
-        .file-link-input {
-            display: flex;
-            gap: 12px;
-            align-items: flex-start;
-        }
-
-        .file-link-input input {
-            flex: 1;
-        }
-
-        .file-links {
-            margin-top: 12px;
-        }
-
-        .file-link-item {
-            background: #f8f9fa;
-            padding: 12px 16px;
-            border-radius: 6px;
-            margin-bottom: 8px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-size: 14px;
-            border: 1px solid #e9ecef;
-        }
-
-        .file-link-item a {
-            color: #0d6efd;
-            text-decoration: none;
-            word-break: break-all;
-        }
-
-        .file-link-item a:hover {
-            text-decoration: underline;
-        }
-
-        .file-link-item button {
-            padding: 4px 12px;
-            font-size: 12px;
-        }
-
-        @media (max-width: 768px) {
-            .header {
-                padding: 24px;
-            }
-
-            .content {
-                padding: 24px;
-            }
-
-            .form-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .share-link-container {
-                flex-direction: column;
-            }
-
-            .section-header {
-                flex-direction: column;
-            }
-
-            .section-number {
-                margin-bottom: 12px;
-            }
-        }
-    </style>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="main.css">
 </head>
 <body>
     <div class="container">
@@ -463,12 +17,16 @@
                     <p>Create your Brave advertising campaign with ease</p>
                 </div>
             </div>
-            
+
             <div class="share-section">
                 <p>📋 Share this link to collaborate:</p>
                 <div class="share-link-container">
                     <div class="share-link" id="shareLink">Loading...</div>
-                    <button class="copy-btn" onclick="copyShareLink()">Copy Link</button>
+                    <button class="copy-btn" onclick="copyLink()">Copy Link</button>
+                </div>
+                <div style="margin-top: 12px; font-size: 13px; color: #6c757d;">
+                    <strong>Config ID:</strong> <span id="configId" style="font-family: 'Monaco', 'Courier New', monospace; color: #495057;">-</span>
+                    <span style="margin-left: 8px; font-size: 12px; color: #adb5bd;">(Use this to verify both parties are viewing the same configuration)</span>
                 </div>
             </div>
         </div>
@@ -487,32 +45,32 @@
                 <div class="form-grid">
                     <div class="form-group">
                         <label for="companyName">Company Name</label>
-                        <input type="text" id="companyName" data-save="true">
+                        <input type="text" id="companyName" oninput="saveData()">
                     </div>
 
                     <div class="form-group">
                         <label for="campaignName">Campaign Name</label>
-                        <input type="text" id="campaignName" data-save="true">
+                        <input type="text" id="campaignName" oninput="saveData()">
                     </div>
 
                     <div class="form-group">
                         <label for="startDate">Start Date</label>
-                        <input type="date" id="startDate" data-save="true">
+                        <input type="date" id="startDate" oninput="saveData()">
                     </div>
 
                     <div class="form-group">
                         <label for="endDate">End Date</label>
-                        <input type="date" id="endDate" data-save="true">
+                        <input type="date" id="endDate" oninput="saveData()">
                     </div>
 
                     <div class="form-group full-width">
-                        <label for="landingPage">Landing Page URL</label>
-                        <input type="url" id="landingPage" placeholder="https://example.com" data-save="true">
+                        <label for="landingUrl">Landing Page URL</label>
+                        <input type="url" id="landingUrl" placeholder="https://" oninput="saveData()">
                     </div>
 
                     <div class="form-group full-width">
-                        <label for="conversionURL">Conversion URL</label>
-                        <input type="url" id="conversionURL" placeholder="https://domain.com/checkout?order=*/thankyou" data-save="true">
+                        <label for="conversionUrl">Conversion URL</label>
+                        <input type="url" id="conversionUrl" placeholder="https://" oninput="saveData()">
                         <div class="help-text">For conversion tracking - use * as wildcard (e.g., https://domain.com/checkout?order=*/thankyou)</div>
                     </div>
                 </div>
@@ -530,28 +88,28 @@
 
                 <div class="form-grid">
                     <div class="form-group">
-                        <label for="contactEmail">Email Address</label>
-                        <input type="email" id="contactEmail" data-save="true">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" oninput="saveData()">
                     </div>
 
                     <div class="form-group">
                         <label for="contactName">Contact Name</label>
-                        <input type="text" id="contactName" data-save="true">
+                        <input type="text" id="contactName" oninput="saveData()">
                     </div>
 
                     <div class="form-group">
-                        <label for="phoneNumber">Phone Number</label>
-                        <input type="tel" id="phoneNumber" data-save="true">
+                        <label for="phone">Phone Number</label>
+                        <input type="tel" id="phone" oninput="saveData()">
                     </div>
 
                     <div class="form-group full-width">
                         <label for="billingAddress">Billing Address</label>
-                        <textarea id="billingAddress" data-save="true"></textarea>
+                        <textarea id="billingAddress" oninput="saveData()"></textarea>
                     </div>
                 </div>
             </div>
 
-            <!-- Section 3: Targeting -->
+            <!-- Section 3: Targeting Options -->
             <div class="section">
                 <div class="section-header">
                     <div class="section-number">3</div>
@@ -563,33 +121,17 @@
 
                 <div class="form-group">
                     <label>Target Countries</label>
-                    <div class="checkbox-group" id="countryCheckboxes"></div>
+                    <div class="checkbox-group" id="countriesGroup"></div>
                 </div>
 
                 <div class="form-group">
                     <label>Operating Systems</label>
-                    <div class="checkbox-group">
-                        <label class="checkbox-item">
-                            <input type="checkbox" name="os" value="windows" data-save="true"> Windows
-                        </label>
-                        <label class="checkbox-item">
-                            <input type="checkbox" name="os" value="macos" data-save="true"> macOS
-                        </label>
-                        <label class="checkbox-item">
-                            <input type="checkbox" name="os" value="linux" data-save="true"> Linux
-                        </label>
-                        <label class="checkbox-item">
-                            <input type="checkbox" name="os" value="android" data-save="true"> Android
-                        </label>
-                        <label class="checkbox-item">
-                            <input type="checkbox" name="os" value="ios" data-save="true"> iOS
-                        </label>
-                    </div>
+                    <div class="checkbox-group" id="osGroup"></div>
                 </div>
 
                 <div class="form-group">
                     <label>Content Categories</label>
-                    <div class="checkbox-group" id="categoryCheckboxes"></div>
+                    <div class="checkbox-group" id="categoriesGroup"></div>
                 </div>
             </div>
 
@@ -612,9 +154,8 @@
                     • Test multiple variations (5+ recommended)
                 </div>
 
-                <div id="notificationCreativesList"></div>
-                
-                <button class="btn-secondary add-creative-btn" onclick="addNotificationCreative()">+ Add Notification Ad</button>
+                <div id="notificationAds"></div>
+                <button class="btn-secondary add-creative-btn" onclick="addNotificationAd()">+ Add Notification Ad</button>
             </div>
 
             <!-- Section 5: Rewards Offer Wall -->
@@ -630,29 +171,29 @@
                 <div class="form-group">
                     <label>Offer Wall Image Link (200x200 PNG - Company Logo)</label>
                     <div class="file-link-input">
-                        <input type="url" id="offerWallImageInput" placeholder="https://example.com/logo.png">
-                        <button class="btn-secondary" onclick="addOfferWallImageLink()">Add Link</button>
+                        <input type="url" id="offerImageInput" placeholder="https://example.com/logo.png">
+                        <button class="btn-secondary" onclick="addOfferImage()">Add Link</button>
                     </div>
                     <div class="help-text">200x200px PNG format - provide a link to your company logo</div>
-                    <div class="file-links" id="offerWallImageLinks"></div>
+                    <div class="file-links" id="offerImageLinks"></div>
                 </div>
 
                 <div class="form-group">
-                    <label for="offerWallTitle">Offer Title (Max 30 characters)</label>
-                    <input type="text" id="offerWallTitle" maxlength="30" data-save="true">
-                    <div class="char-counter"><span>0</span>/30</div>
+                    <label for="offerTitle">Offer Title (Max 30 characters)</label>
+                    <input type="text" id="offerTitle" maxlength="30" oninput="updateCharCount('offerTitle', 30); saveData()">
+                    <div class="char-counter" id="offerTitle-counter">0/30</div>
                 </div>
 
                 <div class="form-group">
-                    <label for="offerWallBody">Offer Description (Max 60 characters)</label>
-                    <textarea id="offerWallBody" maxlength="60" rows="2" data-save="true"></textarea>
-                    <div class="char-counter"><span>0</span>/60</div>
+                    <label for="offerDescription">Offer Description (Max 60 characters)</label>
+                    <textarea id="offerDescription" maxlength="60" oninput="updateCharCount('offerDescription', 60); saveData()"></textarea>
                     <div class="help-text">Highlight a benefit to Brave users</div>
+                    <div class="char-counter" id="offerDescription-counter">0/60</div>
                 </div>
 
                 <div class="form-group">
-                    <label for="offerWallURL">Click URL</label>
-                    <input type="url" id="offerWallURL" data-save="true">
+                    <label for="offerClickUrl">Click URL</label>
+                    <input type="url" id="offerClickUrl" placeholder="https://" oninput="saveData()">
                 </div>
             </div>
 
@@ -679,33 +220,33 @@
                 <div class="form-group">
                     <label>Background Image Links (1-4 images, min 2560x1440px)</label>
                     <div class="file-link-input">
-                        <input type="url" id="nttBackgroundInput" placeholder="https://example.com/background.jpg">
-                        <button class="btn-secondary" onclick="addBackgroundLink()">Add Link</button>
+                        <input type="url" id="bgImageInput" placeholder="https://example.com/background.jpg">
+                        <button class="btn-secondary" onclick="addBackgroundImage()">Add Link</button>
                     </div>
                     <div class="help-text">JPEG, PNG, or Layered PSD - provide links to your background images</div>
-                    <div class="file-links" id="backgroundLinks"></div>
+                    <div class="file-links" id="bgImageLinks"></div>
                 </div>
 
                 <div class="form-group">
                     <label>Brand Logo Link (512x512 PNG with transparent background)</label>
                     <div class="file-link-input">
-                        <input type="url" id="nttLogoInput" placeholder="https://example.com/logo.png">
-                        <button class="btn-secondary" onclick="addLogoLink()">Add Link</button>
+                        <input type="url" id="brandLogoInput" placeholder="https://example.com/logo.png">
+                        <button class="btn-secondary" onclick="addBrandLogo()">Add Link</button>
                     </div>
                     <div class="help-text">512x512px PNG with transparent background</div>
-                    <div class="file-links" id="logoLinks"></div>
+                    <div class="file-links" id="brandLogoLinks"></div>
                 </div>
 
                 <div class="form-group">
-                    <label for="nttCTA">Call to Action (Max 90 characters)</label>
-                    <input type="text" id="nttCTA" maxlength="90" data-save="true">
-                    <div class="char-counter"><span>0</span>/90</div>
+                    <label for="ctaText">Call to Action (Max 90 characters)</label>
+                    <input type="text" id="ctaText" maxlength="90" oninput="updateCharCount('ctaText', 90); saveData()">
                     <div class="help-text">Optional CTA to overlay on the logo</div>
+                    <div class="char-counter" id="ctaText-counter">0/90</div>
                 </div>
 
                 <div class="form-group">
-                    <label for="nttURL">Click URL</label>
-                    <input type="url" id="nttURL" data-save="true">
+                    <label for="nttClickUrl">Click URL</label>
+                    <input type="url" id="nttClickUrl" placeholder="https://" oninput="saveData()">
                 </div>
             </div>
 
@@ -720,122 +261,443 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="additionalNotes">Notes</label>
-                    <textarea id="additionalNotes" rows="5" data-save="true" placeholder="Add any additional information, special requirements, or questions here..."></textarea>
+                    <label for="notes">Notes</label>
+                    <textarea id="notes" oninput="saveData()"></textarea>
                 </div>
             </div>
         </div>
     </div>
 
-    <div class="save-notification" id="saveNotification">
-        ✓ Changes saved
-    </div>
+    <div class="save-notification" id="saveNotification">✓ Changes saved</div>
 
     <script>
         // Countries list
         const countries = [
-            'United States', 'Canada', 'United Kingdom', 'Australia', 'Germany', 'France', 
-            'Spain', 'Italy', 'Japan', 'South Korea', 'Brazil', 'Mexico', 'India', 
-            'Singapore', 'Netherlands', 'Sweden', 'Norway', 'Denmark', 'Switzerland', 
-            'Austria', 'Belgium', 'Poland', 'Portugal', 'Turkey', 'Saudi Arabia', 'Argentina',
-            'Chile', 'Colombia', 'Indonesia', 'Malaysia', 'Philippines', 'Thailand', 'Vietnam',
-            'New Zealand', 'Ireland', 'Finland', 'Greece', 'Czech Republic', 'Romania', 'Hungary'
+            'United States', 'United Kingdom', 'Canada', 'Australia', 'Germany', 
+            'France', 'Spain', 'Italy', 'Netherlands', 'Belgium', 'Switzerland',
+            'Sweden', 'Norway', 'Denmark', 'Finland', 'Ireland', 'Austria',
+            'Portugal', 'Poland', 'Czech Republic', 'Japan', 'South Korea',
+            'Singapore', 'India', 'Brazil', 'Mexico', 'Argentina', 'Chile'
         ];
 
-        // Categories list
-        const categories = [
-            'Agriculture', 'Architecture', 'Arts & Entertainment', 'Automotive', 'Business', 
-            'Careers', 'Cell Phones', 'Crypto', 'Education', 'Fashion', 'Folklore',
-            'Food & Drink', 'Health', 'History', 'Hobbies & Interests', 'Home', 'Law',
-            'Personal Finance', 'Pets', 'Philosophy', 'Real Estate', 'Science', 'Society',
-            'Sports', 'Technology & Computing', 'Travel', 'Weather'
+        // Operating Systems
+        const operatingSystems = ['Windows', 'macOS', 'Linux', 'Android', 'iOS'];
+
+        // Content Categories
+        const contentCategories = [
+            'Arts & Entertainment', 'Automotive', 'Business', 'Careers',
+            'Education', 'Family & Parenting', 'Food & Drink', 'Health & Fitness',
+            'Hobbies & Interests', 'Home & Garden', 'Law & Government',
+            'News & Politics', 'Personal Finance', 'Pets', 'Real Estate',
+            'Science', 'Shopping', 'Sports', 'Style & Fashion', 'Technology',
+            'Travel', 'Video Gaming'
         ];
 
-        let notificationCreativeCount = 0;
-        let saveTimeout;
+        let notificationAdCounter = 0;
+        let formData = {
+            countries: [],
+            operatingSystems: [],
+            contentCategories: [],
+            notificationAds: [],
+            offerImages: [],
+            backgroundImages: [],
+            brandLogos: []
+        };
 
-        // Initialize
-        document.addEventListener('DOMContentLoaded', function() {
-            loadFromURL();
-            populateCountries();
-            populateCategories();
-            setupAutoSave();
-            setupCharCounters();
-            updateShareLink();
-        });
-
-        // Populate countries
-        function populateCountries() {
-            const container = document.getElementById('countryCheckboxes');
+        // Initialize checkboxes
+        function initCheckboxes() {
+            const countriesGroup = document.getElementById('countriesGroup');
             countries.forEach(country => {
-                const label = document.createElement('label');
-                label.className = 'checkbox-item';
-                label.innerHTML = `<input type="checkbox" name="country" value="${country}" data-save="true"> ${country}`;
-                container.appendChild(label);
+                const item = createCheckboxItem(country, 'country');
+                countriesGroup.appendChild(item);
+            });
+
+            const osGroup = document.getElementById('osGroup');
+            operatingSystems.forEach(os => {
+                const item = createCheckboxItem(os, 'os');
+                osGroup.appendChild(item);
+            });
+
+            const categoriesGroup = document.getElementById('categoriesGroup');
+            contentCategories.forEach(category => {
+                const item = createCheckboxItem(category, 'category');
+                categoriesGroup.appendChild(item);
             });
         }
 
-        // Populate categories
-        function populateCategories() {
-            const container = document.getElementById('categoryCheckboxes');
-            categories.forEach(category => {
-                const label = document.createElement('label');
-                label.className = 'checkbox-item';
-                label.innerHTML = `<input type="checkbox" name="category" value="${category}" data-save="true"> ${category}`;
-                container.appendChild(label);
-            });
-        }
-
-        // Character counters
-        function setupCharCounters() {
-            document.querySelectorAll('input[maxlength], textarea[maxlength]').forEach(input => {
-                updateCharCounter(input);
-                input.addEventListener('input', function() {
-                    updateCharCounter(this);
-                });
-            });
-        }
-
-        function updateCharCounter(input) {
-            const counter = input.parentElement.querySelector('.char-counter span');
-            if (counter) {
-                counter.textContent = input.value.length;
-                const counterDiv = input.parentElement.querySelector('.char-counter');
-                const max = parseInt(input.getAttribute('maxlength'));
-                if (input.value.length > max * 0.9) {
-                    counterDiv.classList.add('warning');
-                } else {
-                    counterDiv.classList.remove('warning');
+        function createCheckboxItem(label, type) {
+            const div = document.createElement('div');
+            div.className = 'checkbox-item';
+            
+            const checkbox = document.createElement('input');
+            checkbox.type = 'checkbox';
+            checkbox.id = `${type}-${label.replace(/\s+/g, '-')}`;
+            checkbox.value = label;
+            checkbox.onchange = function() {
+                div.classList.toggle('checked', this.checked);
+                updateCheckboxArray(type);
+                saveData();
+            };
+            
+            const labelElement = document.createElement('label');
+            labelElement.htmlFor = checkbox.id;
+            labelElement.textContent = label;
+            labelElement.style.cursor = 'pointer';
+            labelElement.style.margin = '0';
+            
+            div.appendChild(checkbox);
+            div.appendChild(labelElement);
+            
+            div.onclick = function(e) {
+                if (e.target !== checkbox) {
+                    checkbox.checked = !checkbox.checked;
+                    div.classList.toggle('checked', checkbox.checked);
+                    updateCheckboxArray(type);
+                    saveData();
                 }
+            };
+            
+            return div;
+        }
+
+        function updateCheckboxArray(type) {
+            let arrayName;
+            let prefix;
+            
+            if (type === 'country') {
+                arrayName = 'countries';
+                prefix = 'country-';
+            } else if (type === 'os') {
+                arrayName = 'operatingSystems';
+                prefix = 'os-';
+            } else if (type === 'category') {
+                arrayName = 'contentCategories';
+                prefix = 'category-';
+            }
+            
+            const checkboxes = document.querySelectorAll(`input[id^="${prefix}"]`);
+            formData[arrayName] = Array.from(checkboxes)
+                .filter(cb => cb.checked)
+                .map(cb => cb.value);
+        }
+
+        function addNotificationAd() {
+            const container = document.getElementById('notificationAds');
+            const id = notificationAdCounter++;
+            
+            const adDiv = document.createElement('div');
+            adDiv.className = 'creative-item';
+            adDiv.id = `notification-ad-${id}`;
+            adDiv.innerHTML = `
+                <div class="creative-header">
+                    <h4>Notification Ad ${id + 1}</h4>
+                    <button class="remove-btn" onclick="removeNotificationAd(${id})">Remove</button>
+                </div>
+                <div class="form-group">
+                    <label for="notif-title-${id}">Title (Max 30 characters)</label>
+                    <input type="text" id="notif-title-${id}" maxlength="30" oninput="updateCharCount('notif-title-${id}', 30); saveNotificationAd(${id})">
+                    <div class="char-counter" id="notif-title-${id}-counter">0/30</div>
+                </div>
+                <div class="form-group">
+                    <label for="notif-body-${id}">Body (Max 60 characters)</label>
+                    <textarea id="notif-body-${id}" maxlength="60" oninput="updateCharCount('notif-body-${id}', 60); saveNotificationAd(${id})"></textarea>
+                    <div class="char-counter" id="notif-body-${id}-counter">0/60</div>
+                </div>
+                <div class="form-group">
+                    <label for="notif-url-${id}">Click URL</label>
+                    <input type="url" id="notif-url-${id}" placeholder="https://" oninput="saveNotificationAd(${id})">
+                </div>
+            `;
+            
+            container.appendChild(adDiv);
+            
+            if (!formData.notificationAds) {
+                formData.notificationAds = [];
+            }
+            formData.notificationAds.push({ id, title: '', body: '', url: '' });
+            saveData();
+        }
+
+        function removeNotificationAd(id) {
+            const adDiv = document.getElementById(`notification-ad-${id}`);
+            if (adDiv) {
+                adDiv.remove();
+            }
+            formData.notificationAds = formData.notificationAds.filter(ad => ad.id !== id);
+            saveData();
+        }
+
+        function saveNotificationAd(id) {
+            const title = document.getElementById(`notif-title-${id}`).value;
+            const body = document.getElementById(`notif-body-${id}`).value;
+            const url = document.getElementById(`notif-url-${id}`).value;
+            
+            const adIndex = formData.notificationAds.findIndex(ad => ad.id === id);
+            if (adIndex !== -1) {
+                formData.notificationAds[adIndex] = { id, title, body, url };
+            }
+            saveData();
+        }
+
+        function addOfferImage() {
+            const input = document.getElementById('offerImageInput');
+            const url = input.value.trim();
+            
+            if (url) {
+                if (!formData.offerImages) {
+                    formData.offerImages = [];
+                }
+                formData.offerImages.push(url);
+                input.value = '';
+                renderFileLinks('offerImages', 'offerImageLinks');
+                saveData();
             }
         }
 
-        // Auto-save functionality
-        function setupAutoSave() {
-            document.addEventListener('input', function(e) {
-                if (e.target.dataset.save === 'true') {
-                    clearTimeout(saveTimeout);
-                    saveTimeout = setTimeout(() => {
-                        saveToURL();
-                        showSaveNotification();
-                    }, 1000);
-                }
-            });
+        function addBackgroundImage() {
+            const input = document.getElementById('bgImageInput');
+            const url = input.value.trim();
+            
+            if (url && formData.backgroundImages.length < 4) {
+                formData.backgroundImages.push(url);
+                input.value = '';
+                renderFileLinks('backgroundImages', 'bgImageLinks');
+                saveData();
+            }
+        }
 
-            document.addEventListener('change', function(e) {
-                if (e.target.dataset.save === 'true') {
-                    saveToURL();
-                    showSaveNotification();
+        function addBrandLogo() {
+            const input = document.getElementById('brandLogoInput');
+            const url = input.value.trim();
+            
+            if (url) {
+                if (!formData.brandLogos) {
+                    formData.brandLogos = [];
                 }
-                
-                if (e.target.type === 'checkbox' && e.target.closest('.checkbox-item')) {
-                    const item = e.target.closest('.checkbox-item');
-                    if (e.target.checked) {
-                        item.classList.add('checked');
-                    } else {
-                        item.classList.remove('checked');
+                formData.brandLogos.push(url);
+                input.value = '';
+                renderFileLinks('brandLogos', 'brandLogoLinks');
+                saveData();
+            }
+        }
+
+        function renderFileLinks(arrayName, containerId) {
+            const container = document.getElementById(containerId);
+            container.innerHTML = '';
+            
+            const array = formData[arrayName] || [];
+            array.forEach((url, index) => {
+                const div = document.createElement('div');
+                div.className = 'file-link-item';
+                div.innerHTML = `
+                    <a href="${url}" target="_blank">${url}</a>
+                    <button class="remove-btn" onclick="removeFileLink('${arrayName}', ${index}, '${containerId}')">Remove</button>
+                `;
+                container.appendChild(div);
+            });
+        }
+
+        function removeFileLink(arrayName, index, containerId) {
+            formData[arrayName].splice(index, 1);
+            renderFileLinks(arrayName, containerId);
+            saveData();
+        }
+
+        function updateCharCount(fieldId, max) {
+            const field = document.getElementById(fieldId);
+            const counter = document.getElementById(`${fieldId}-counter`);
+            const length = field.value.length;
+            counter.textContent = `${length}/${max}`;
+            
+            if (length >= max * 0.9) {
+                counter.classList.add('warning');
+            } else {
+                counter.classList.remove('warning');
+            }
+        }
+
+        // Generate a short hash for the configuration
+        function generateConfigId(data) {
+            const str = JSON.stringify(data);
+            let hash = 0;
+            for (let i = 0; i < str.length; i++) {
+                const char = str.charCodeAt(i);
+                hash = ((hash << 5) - hash) + char;
+                hash = hash & hash;
+            }
+            // Convert to base36 and take first 8 characters
+            return Math.abs(hash).toString(36).substring(0, 8).toUpperCase();
+        }
+
+        function saveData() {
+            // Collect all form data
+            formData.companyName = document.getElementById('companyName').value;
+            formData.campaignName = document.getElementById('campaignName').value;
+            formData.startDate = document.getElementById('startDate').value;
+            formData.endDate = document.getElementById('endDate').value;
+            formData.landingUrl = document.getElementById('landingUrl').value;
+            formData.conversionUrl = document.getElementById('conversionUrl').value;
+            formData.email = document.getElementById('email').value;
+            formData.contactName = document.getElementById('contactName').value;
+            formData.phone = document.getElementById('phone').value;
+            formData.billingAddress = document.getElementById('billingAddress').value;
+            formData.offerTitle = document.getElementById('offerTitle').value;
+            formData.offerDescription = document.getElementById('offerDescription').value;
+            formData.offerClickUrl = document.getElementById('offerClickUrl').value;
+            formData.ctaText = document.getElementById('ctaText').value;
+            formData.nttClickUrl = document.getElementById('nttClickUrl').value;
+            formData.notes = document.getElementById('notes').value;
+
+            // Encode to base64
+            const encoded = btoa(encodeURIComponent(JSON.stringify(formData)));
+            const url = `${window.location.origin}${window.location.pathname}?data=${encoded}`;
+            
+            // Generate config ID
+            const configId = generateConfigId(formData);
+            document.getElementById('configId').textContent = configId;
+            
+            // Update share link
+            document.getElementById('shareLink').textContent = url;
+            
+            // Update browser URL without reload
+            window.history.replaceState({}, '', url);
+            
+            // Show save notification
+            showSaveNotification();
+        }
+
+        function loadData() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const encodedData = urlParams.get('data');
+            
+            if (encodedData) {
+                try {
+                    const decoded = JSON.parse(decodeURIComponent(atob(encodedData)));
+                    formData = decoded;
+                    
+                    // Restore basic fields
+                    document.getElementById('companyName').value = formData.companyName || '';
+                    document.getElementById('campaignName').value = formData.campaignName || '';
+                    document.getElementById('startDate').value = formData.startDate || '';
+                    document.getElementById('endDate').value = formData.endDate || '';
+                    document.getElementById('landingUrl').value = formData.landingUrl || '';
+                    document.getElementById('conversionUrl').value = formData.conversionUrl || '';
+                    document.getElementById('email').value = formData.email || '';
+                    document.getElementById('contactName').value = formData.contactName || '';
+                    document.getElementById('phone').value = formData.phone || '';
+                    document.getElementById('billingAddress').value = formData.billingAddress || '';
+                    document.getElementById('offerTitle').value = formData.offerTitle || '';
+                    document.getElementById('offerDescription').value = formData.offerDescription || '';
+                    document.getElementById('offerClickUrl').value = formData.offerClickUrl || '';
+                    document.getElementById('ctaText').value = formData.ctaText || '';
+                    document.getElementById('nttClickUrl').value = formData.nttClickUrl || '';
+                    document.getElementById('notes').value = formData.notes || '';
+                    
+                    // Update character counters
+                    updateCharCount('offerTitle', 30);
+                    updateCharCount('offerDescription', 60);
+                    updateCharCount('ctaText', 90);
+                    
+                    // Restore checkboxes
+                    if (formData.countries) {
+                        formData.countries.forEach(country => {
+                            const checkbox = document.getElementById(`country-${country.replace(/\s+/g, '-')}`);
+                            if (checkbox) {
+                                checkbox.checked = true;
+                                checkbox.parentElement.classList.add('checked');
+                            }
+                        });
                     }
+                    
+                    if (formData.operatingSystems) {
+                        formData.operatingSystems.forEach(os => {
+                            const checkbox = document.getElementById(`os-${os.replace(/\s+/g, '-')}`);
+                            if (checkbox) {
+                                checkbox.checked = true;
+                                checkbox.parentElement.classList.add('checked');
+                            }
+                        });
+                    }
+                    
+                    if (formData.contentCategories) {
+                        formData.contentCategories.forEach(category => {
+                            const checkbox = document.getElementById(`category-${category.replace(/\s+/g, '-')}`);
+                            if (checkbox) {
+                                checkbox.checked = true;
+                                checkbox.parentElement.classList.add('checked');
+                            }
+                        });
+                    }
+                    
+                    // Restore notification ads
+                    if (formData.notificationAds && formData.notificationAds.length > 0) {
+                        formData.notificationAds.forEach(ad => {
+                            const id = notificationAdCounter++;
+                            const container = document.getElementById('notificationAds');
+                            const adDiv = document.createElement('div');
+                            adDiv.className = 'creative-item';
+                            adDiv.id = `notification-ad-${id}`;
+                            adDiv.innerHTML = `
+                                <div class="creative-header">
+                                    <h4>Notification Ad ${id + 1}</h4>
+                                    <button class="remove-btn" onclick="removeNotificationAd(${id})">Remove</button>
+                                </div>
+                                <div class="form-group">
+                                    <label for="notif-title-${id}">Title (Max 30 characters)</label>
+                                    <input type="text" id="notif-title-${id}" maxlength="30" value="${ad.title || ''}" oninput="updateCharCount('notif-title-${id}', 30); saveNotificationAd(${id})">
+                                    <div class="char-counter" id="notif-title-${id}-counter">${(ad.title || '').length}/30</div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="notif-body-${id}">Body (Max 60 characters)</label>
+                                    <textarea id="notif-body-${id}" maxlength="60" oninput="updateCharCount('notif-body-${id}', 60); saveNotificationAd(${id})">${ad.body || ''}</textarea>
+                                    <div class="char-counter" id="notif-body-${id}-counter">${(ad.body || '').length}/60</div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="notif-url-${id}">Click URL</label>
+                                    <input type="url" id="notif-url-${id}" placeholder="https://" value="${ad.url || ''}" oninput="saveNotificationAd(${id})">
+                                </div>
+                            `;
+                            container.appendChild(adDiv);
+                            
+                            // Update the formData with the current id
+                            ad.id = id;
+                        });
+                    }
+                    
+                    // Restore file links
+                    if (formData.offerImages) {
+                        renderFileLinks('offerImages', 'offerImageLinks');
+                    }
+                    if (formData.backgroundImages) {
+                        renderFileLinks('backgroundImages', 'bgImageLinks');
+                    }
+                    if (formData.brandLogos) {
+                        renderFileLinks('brandLogos', 'brandLogoLinks');
+                    }
+                    
+                    // Generate and display config ID
+                    const configId = generateConfigId(formData);
+                    document.getElementById('configId').textContent = configId;
+                    
+                } catch (e) {
+                    console.error('Error loading data:', e);
                 }
+            }
+            
+            // Update share link
+            const url = window.location.href;
+            document.getElementById('shareLink').textContent = url;
+        }
+
+        function copyLink() {
+            const link = document.getElementById('shareLink').textContent;
+            navigator.clipboard.writeText(link).then(() => {
+                const btn = document.querySelector('.copy-btn');
+                const originalText = btn.textContent;
+                btn.textContent = '✓ Copied!';
+                setTimeout(() => {
+                    btn.textContent = originalText;
+                }, 2000);
             });
         }
 
@@ -847,367 +709,11 @@
             }, 2000);
         }
 
-        // File link management
-        function addBackgroundLink() {
-            const input = document.getElementById('nttBackgroundInput');
-            const url = input.value.trim();
-            if (url) {
-                const container = document.getElementById('backgroundLinks');
-                const div = document.createElement('div');
-                div.className = 'file-link-item';
-                div.innerHTML = `
-                    <a href="${url}" target="_blank">${url}</a>
-                    <button class="remove-btn" onclick="removeFileLink(this)">Remove</button>
-                `;
-                container.appendChild(div);
-                input.value = '';
-                saveToURL();
-            }
-        }
-
-        function addLogoLink() {
-            const input = document.getElementById('nttLogoInput');
-            const url = input.value.trim();
-            if (url) {
-                const container = document.getElementById('logoLinks');
-                container.innerHTML = '';
-                const div = document.createElement('div');
-                div.className = 'file-link-item';
-                div.innerHTML = `
-                    <a href="${url}" target="_blank">${url}</a>
-                    <button class="remove-btn" onclick="removeFileLink(this)">Remove</button>
-                `;
-                container.appendChild(div);
-                input.value = '';
-                saveToURL();
-            }
-        }
-
-        function addOfferWallImageLink() {
-            const input = document.getElementById('offerWallImageInput');
-            const url = input.value.trim();
-            if (url) {
-                const container = document.getElementById('offerWallImageLinks');
-                container.innerHTML = '';
-                const div = document.createElement('div');
-                div.className = 'file-link-item';
-                div.innerHTML = `
-                    <a href="${url}" target="_blank">${url}</a>
-                    <button class="remove-btn" onclick="removeFileLink(this)">Remove</button>
-                `;
-                container.appendChild(div);
-                input.value = '';
-                saveToURL();
-            }
-        }
-
-        function removeFileLink(button) {
-            button.closest('.file-link-item').remove();
-            saveToURL();
-        }
-
-        // Data encoding/decoding with URL
-        function saveToURL() {
-            const data = collectFormData();
-            const compressed = LZString.compressToEncodedURIComponent(JSON.stringify(data));
-            const newURL = window.location.pathname + '?data=' + compressed;
-            window.history.replaceState({}, '', newURL);
-            updateShareLink();
-        }
-
-        function loadFromURL() {
-            const urlParams = new URLSearchParams(window.location.search);
-            const compressed = urlParams.get('data');
-            
-            if (compressed) {
-                try {
-                    const json = LZString.decompressFromEncodedURIComponent(compressed);
-                    const data = JSON.parse(json);
-                    populateFormData(data);
-                } catch (e) {
-                    console.error('Error loading data from URL:', e);
-                }
-            }
-        }
-
-        function collectFormData() {
-            const data = {
-                basics: {},
-                contact: {},
-                targeting: {
-                    countries: [],
-                    os: [],
-                    categories: []
-                },
-                notificationAds: [],
-                offerWall: {},
-                newTabTakeover: {},
-                fileLinks: {
-                    backgrounds: [],
-                    logo: [],
-                    offerWallImage: []
-                },
-                notes: ''
-            };
-
-            // Basic fields
-            const basicFields = ['companyName', 'campaignName', 'startDate', 'endDate', 'landingPage', 'conversionURL'];
-            basicFields.forEach(field => {
-                const el = document.getElementById(field);
-                if (el && el.value) data.basics[field] = el.value;
-            });
-
-            // Contact fields
-            const contactFields = ['contactEmail', 'contactName', 'phoneNumber', 'billingAddress'];
-            contactFields.forEach(field => {
-                const el = document.getElementById(field);
-                if (el && el.value) data.contact[field] = el.value;
-            });
-
-            // Targeting
-            data.targeting.countries = Array.from(document.querySelectorAll('input[name="country"]:checked'))
-                .map(cb => cb.value);
-            data.targeting.os = Array.from(document.querySelectorAll('input[name="os"]:checked'))
-                .map(cb => cb.value);
-            data.targeting.categories = Array.from(document.querySelectorAll('input[name="category"]:checked'))
-                .map(cb => cb.value);
-
-            // Notification Ads
-            document.querySelectorAll('#notificationCreativesList .creative-item').forEach(item => {
-                const creative = {
-                    title: item.querySelector('.creative-title')?.value || '',
-                    body: item.querySelector('.creative-body')?.value || '',
-                    url: item.querySelector('.creative-url')?.value || ''
-                };
-                if (creative.title || creative.body || creative.url) {
-                    data.notificationAds.push(creative);
-                }
-            });
-
-            // Offer Wall
-            const offerWallTitle = document.getElementById('offerWallTitle');
-            const offerWallBody = document.getElementById('offerWallBody');
-            const offerWallURL = document.getElementById('offerWallURL');
-            if (offerWallTitle?.value || offerWallBody?.value || offerWallURL?.value) {
-                data.offerWall = {
-                    title: offerWallTitle?.value || '',
-                    body: offerWallBody?.value || '',
-                    url: offerWallURL?.value || ''
-                };
-            }
-
-            // New Tab Takeover
-            const nttCTA = document.getElementById('nttCTA');
-            const nttURL = document.getElementById('nttURL');
-            if (nttCTA?.value || nttURL?.value) {
-                data.newTabTakeover = {
-                    cta: nttCTA?.value || '',
-                    url: nttURL?.value || ''
-                };
-            }
-
-            // File Links
-            document.querySelectorAll('#backgroundLinks .file-link-item a').forEach(link => {
-                data.fileLinks.backgrounds.push(link.href);
-            });
-            const logoLink = document.querySelector('#logoLinks .file-link-item a');
-            if (logoLink) {
-                data.fileLinks.logo.push(logoLink.href);
-            }
-            const offerWallImageLink = document.querySelector('#offerWallImageLinks .file-link-item a');
-            if (offerWallImageLink) {
-                data.fileLinks.offerWallImage.push(offerWallImageLink.href);
-            }
-
-            // Notes
-            const notes = document.getElementById('additionalNotes');
-            if (notes?.value) data.notes = notes.value;
-
-            return data;
-        }
-
-        function populateFormData(data) {
-            // Basic fields
-            if (data.basics) {
-                Object.keys(data.basics).forEach(key => {
-                    const el = document.getElementById(key);
-                    if (el) el.value = data.basics[key];
-                });
-            }
-
-            // Contact fields
-            if (data.contact) {
-                Object.keys(data.contact).forEach(key => {
-                    const el = document.getElementById(key);
-                    if (el) el.value = data.contact[key];
-                });
-            }
-
-            // Targeting
-            if (data.targeting) {
-                data.targeting.countries?.forEach(country => {
-                    const cb = document.querySelector(`input[name="country"][value="${country}"]`);
-                    if (cb) {
-                        cb.checked = true;
-                        cb.closest('.checkbox-item').classList.add('checked');
-                    }
-                });
-                data.targeting.os?.forEach(os => {
-                    const cb = document.querySelector(`input[name="os"][value="${os}"]`);
-                    if (cb) {
-                        cb.checked = true;
-                        cb.closest('.checkbox-item').classList.add('checked');
-                    }
-                });
-                data.targeting.categories?.forEach(category => {
-                    const cb = document.querySelector(`input[name="category"][value="${category}"]`);
-                    if (cb) {
-                        cb.checked = true;
-                        cb.closest('.checkbox-item').classList.add('checked');
-                    }
-                });
-            }
-
-            // Notification Ads
-            if (data.notificationAds) {
-                data.notificationAds.forEach(creative => {
-                    addNotificationCreative();
-                    const items = document.querySelectorAll('#notificationCreativesList .creative-item');
-                    const item = items[items.length - 1];
-                    if (item) {
-                        item.querySelector('.creative-title').value = creative.title || '';
-                        item.querySelector('.creative-body').value = creative.body || '';
-                        item.querySelector('.creative-url').value = creative.url || '';
-                        updateCharCounter(item.querySelector('.creative-title'));
-                        updateCharCounter(item.querySelector('.creative-body'));
-                    }
-                });
-            }
-
-            // Offer Wall
-            if (data.offerWall) {
-                const offerWallTitle = document.getElementById('offerWallTitle');
-                const offerWallBody = document.getElementById('offerWallBody');
-                const offerWallURL = document.getElementById('offerWallURL');
-                if (offerWallTitle) offerWallTitle.value = data.offerWall.title || '';
-                if (offerWallBody) offerWallBody.value = data.offerWall.body || '';
-                if (offerWallURL) offerWallURL.value = data.offerWall.url || '';
-                if (offerWallTitle) updateCharCounter(offerWallTitle);
-                if (offerWallBody) updateCharCounter(offerWallBody);
-            }
-
-            // New Tab Takeover
-            if (data.newTabTakeover) {
-                const nttCTA = document.getElementById('nttCTA');
-                const nttURL = document.getElementById('nttURL');
-                if (nttCTA) nttCTA.value = data.newTabTakeover.cta || '';
-                if (nttURL) nttURL.value = data.newTabTakeover.url || '';
-                if (nttCTA) updateCharCounter(nttCTA);
-            }
-
-            // File Links
-            if (data.fileLinks) {
-                const backgroundContainer = document.getElementById('backgroundLinks');
-                data.fileLinks.backgrounds?.forEach(url => {
-                    const div = document.createElement('div');
-                    div.className = 'file-link-item';
-                    div.innerHTML = `
-                        <a href="${url}" target="_blank">${url}</a>
-                        <button class="remove-btn" onclick="removeFileLink(this)">Remove</button>
-                    `;
-                    backgroundContainer.appendChild(div);
-                });
-
-                const logoContainer = document.getElementById('logoLinks');
-                data.fileLinks.logo?.forEach(url => {
-                    const div = document.createElement('div');
-                    div.className = 'file-link-item';
-                    div.innerHTML = `
-                        <a href="${url}" target="_blank">${url}</a>
-                        <button class="remove-btn" onclick="removeFileLink(this)">Remove</button>
-                    `;
-                    logoContainer.appendChild(div);
-                });
-
-                const offerWallImageContainer = document.getElementById('offerWallImageLinks');
-                data.fileLinks.offerWallImage?.forEach(url => {
-                    const div = document.createElement('div');
-                    div.className = 'file-link-item';
-                    div.innerHTML = `
-                        <a href="${url}" target="_blank">${url}</a>
-                        <button class="remove-btn" onclick="removeFileLink(this)">Remove</button>
-                    `;
-                    offerWallImageContainer.appendChild(div);
-                });
-            }
-
-            // Notes
-            if (data.notes) {
-                const notes = document.getElementById('additionalNotes');
-                if (notes) notes.value = data.notes;
-            }
-        }
-
-        // Add notification creative
-        function addNotificationCreative() {
-            notificationCreativeCount++;
-            const list = document.getElementById('notificationCreativesList');
-            const div = document.createElement('div');
-            div.className = 'creative-item';
-            div.innerHTML = `
-                <div class="creative-header">
-                    <h4>Notification Ad #${notificationCreativeCount}</h4>
-                    <button class="remove-btn" onclick="removeCreative(this)">Remove</button>
-                </div>
-                <div class="form-group">
-                    <label>Title (Max 30 characters)</label>
-                    <input type="text" class="creative-title" maxlength="30" data-save="true">
-                    <div class="char-counter"><span>0</span>/30</div>
-                    <div class="help-text">Brand name must be included in ad copy</div>
-                </div>
-                <div class="form-group">
-                    <label>Body (Max 60 characters)</label>
-                    <textarea class="creative-body" maxlength="60" rows="2" data-save="true"></textarea>
-                    <div class="char-counter"><span>0</span>/60</div>
-                </div>
-                <div class="form-group">
-                    <label>Click URL (No third party redirects)</label>
-                    <input type="url" class="creative-url" data-save="true">
-                </div>
-            `;
-            list.appendChild(div);
-            setupCharCounters();
-            setupAutoSave();
-        }
-
-        // Remove creative
-        function removeCreative(button) {
-            button.closest('.creative-item').remove();
-            saveToURL();
-        }
-
-        // Share link functionality
-        function updateShareLink() {
-            const shareLink = document.getElementById('shareLink');
-            shareLink.textContent = window.location.href;
-        }
-
-        function copyShareLink() {
-            const shareLink = document.getElementById('shareLink');
-            const text = shareLink.textContent;
-            
-            navigator.clipboard.writeText(text).then(() => {
-                const btn = event.target;
-                const originalText = btn.textContent;
-                btn.textContent = '✓ Copied!';
-                setTimeout(() => {
-                    btn.textContent = originalText;
-                }, 2000);
-            });
-        }
-
-        // LZ-String compression library (minimal version)
-        var LZString=function(){function o(o,r){if(!t[o]){t[o]={};for(var n=0;n<o.length;n++)t[o][o.charAt(n)]=n}return t[o][r]}var r=String.fromCharCode,n="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=",e="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+-$",t={},i={compressToBase64:function(o){if(null==o)return"";var r=i._compress(o,6,function(o){return n.charAt(o)});switch(r.length%4){default:case 0:return r;case 1:return r+"===";case 2:return r+"==";case 3:return r+"="}},decompressFromBase64:function(r){return null==r?"":""==r?null:i._decompress(r.length,32,function(e){return o(n,r.charAt(e))})},compressToUTF16:function(o){return null==o?"":i._compress(o,15,function(o){return r(o+32)})+" "},decompressFromUTF16:function(o){return null==o?"":""==o?null:i._decompress(o.length,16384,function(r){return o.charCodeAt(r)-32})},compressToUint8Array:function(o){for(var r=i.compress(o),n=new Uint8Array(2*r.length),e=0,t=r.length;t>e;e++){var s=r.charCodeAt(e);n[2*e]=s>>>8,n[2*e+1]=s%256}return n},decompressFromUint8Array:function(o){if(null===o||void 0===o)return i.decompress(o);for(var n=new Array(o.length/2),e=0,t=n.length;t>e;e++)n[e]=256*o[2*e]+o[2*e+1];var s=[];return n.forEach(function(o){s.push(r(o))}),i.decompress(s.join(""))},compressToEncodedURIComponent:function(o){return null==o?"":i._compress(o,6,function(o){return e.charAt(o)})},decompressFromEncodedURIComponent:function(r){return null==r?"":""==r?null:(r=r.replace(/ /g,"+"),i._decompress(r.length,32,function(n){return o(e,r.charAt(n))}))},compress:function(o){return i._compress(o,16,function(o){return r(o)})},_compress:function(o,r,n){if(null==o)return"";var e,t,i,s={},p={},u="",c="",a="",l=2,f=3,h=2,d=[],m=0,v=0;for(i=0;i<o.length;i+=1)if(u=o.charAt(i),Object.prototype.hasOwnProperty.call(s,u)||(s[u]=f++,p[u]=!0),c=a+u,Object.prototype.hasOwnProperty.call(s,c))a=c;else{if(Object.prototype.hasOwnProperty.call(p,a)){if(a.charCodeAt(0)<256){for(e=0;h>e;e++)m<<=1,v==r-1?(v=0,d.push(n(m)),m=0):v++;for(t=a.charCodeAt(0),e=0;8>e;e++)m=m<<1|1&t,v==r-1?(v=0,d.push(n(m)),m=0):v++,t>>=1}else{for(t=1,e=0;h>e;e++)m=m<<1|t,v==r-1?(v=0,d.push(n(m)),m=0):v++,t=0;for(t=a.charCodeAt(0),e=0;16>e;e++)m=m<<1|1&t,v==r-1?(v=0,d.push(n(m)),m=0):v++,t>>=1}l--,0==l&&(l=Math.pow(2,h),h++),delete p[a]}else for(t=s[a],e=0;h>e;e++)m=m<<1|1&t,v==r-1?(v=0,d.push(n(m)),m=0):v++,t>>=1;l--,0==l&&(l=Math.pow(2,h),h++),s[c]=f++,a=String(u)}if(""!==a){if(Object.prototype.hasOwnProperty.call(p,a)){if(a.charCodeAt(0)<256){for(e=0;h>e;e++)m<<=1,v==r-1?(v=0,d.push(n(m)),m=0):v++;for(t=a.charCodeAt(0),e=0;8>e;e++)m=m<<1|1&t,v==r-1?(v=0,d.push(n(m)),m=0):v++,t>>=1}else{for(t=1,e=0;h>e;e++)m=m<<1|t,v==r-1?(v=0,d.push(n(m)),m=0):v++,t=0;for(t=a.charCodeAt(0),e=0;16>e;e++)m=m<<1|1&t,v==r-1?(v=0,d.push(n(m)),m=0):v++,t>>=1}l--,0==l&&(l=Math.pow(2,h),h++),delete p[a]}else for(t=s[a],e=0;h>e;e++)m=m<<1|1&t,v==r-1?(v=0,d.push(n(m)),m=0):v++,t>>=1;l--,0==l&&(l=Math.pow(2,h),h++)}for(t=2,e=0;h>e;e++)m=m<<1|1&t,v==r-1?(v=0,d.push(n(m)),m=0):v++,t>>=1;for(;;){if(m<<=1,v==r-1){d.push(n(m));break}v++}return d.join("")},decompress:function(o){return null==o?"":""==o?null:i._decompress(o.length,32768,function(r){return o.charCodeAt(r)})},_decompress:function(o,n,e){var t,i,s,p,u,c,a,l,f=[],h=4,d=4,m=3,v="",w=[],A={val:e(0),position:n,index:1};for(i=0;3>i;i+=1)f[i]=i;for(p=0,c=Math.pow(2,2),a=1;a!=c;)u=A.val&A.position,A.position>>=1,0==A.position&&(A.position=n,A.val=e(A.index++)),p|=(u>0?1:0)*a,a<<=1;switch(t=p){case 0:for(p=0,c=Math.pow(2,8),a=1;a!=c;)u=A.val&A.position,A.position>>=1,0==A.position&&(A.position=n,A.val=e(A.index++)),p|=(u>0?1:0)*a,a<<=1;l=r(p);break;case 1:for(p=0,c=Math.pow(2,16),a=1;a!=c;)u=A.val&A.position,A.position>>=1,0==A.position&&(A.position=n,A.val=e(A.index++)),p|=(u>0?1:0)*a,a<<=1;l=r(p);break;case 2:return""}for(f[3]=l,s=l,w.push(l);;){if(A.index>o)return"";for(p=0,c=Math.pow(2,m),a=1;a!=c;)u=A.val&A.position,A.position>>=1,0==A.position&&(A.position=n,A.val=e(A.index++)),p|=(u>0?1:0)*a,a<<=1;switch(l=p){case 0:for(p=0,c=Math.pow(2,8),a=1;a!=c;)u=A.val&A.position,A.position>>=1,0==A.position&&(A.position=n,A.val=e(A.index++)),p|=(u>0?1:0)*a,a<<=1;f[d++]=r(p),l=d-1,h--;break;case 1:for(p=0,c=Math.pow(2,16),a=1;a!=c;)u=A.val&A.position,A.position>>=1,0==A.position&&(A.position=n,A.val=e(A.index++)),p|=(u>0?1:0)*a,a<<=1;f[d++]=r(p),l=d-1,h--;break;case 2:return w.join("")}if(0==h&&(h=Math.pow(2,m),m++),f[l])v=f[l];else{if(l!==d)return null;v=s+s.charAt(0)}w.push(v),f[d++]=s+v.charAt(0),h--,s=v,0==h&&(h=Math.pow(2,m),m++)}}};return i}();"function"==typeof define&&define.amd?define(function(){return LZString}):"undefined"!=typeof module&&null!=module&&(module.exports=LZString);
+        // Initialize on load
+        window.onload = function() {
+            initCheckboxes();
+            loadData();
+        };
     </script>
 </body>
 </html>
